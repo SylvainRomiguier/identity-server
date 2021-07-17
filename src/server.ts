@@ -14,6 +14,7 @@ import usersSample from "./mockups/usersSample.json";
 import { passwordService } from "./infrastructure/services/passwordService";
 import { makeMongoDBRepository } from "./infrastructure/repositories/mongoDBRepository/mongoDBRepository";
 import dotenv from "dotenv";
+import fs from "fs";
 
 dotenv.config({path: '.env'});
 
@@ -34,13 +35,18 @@ fastify.register(fastifySwagger, {
 
 const PORT = process.env.PORT || 5000;
 const MONGODB_CONNECTION_STRING = process.env.MONGODB_CONNECTION_STRING;
+const TOKEN_KEYS_PATH=process.env.TOKEN_KEYS_PATH
+const PRIVATE_KEY=fs.readFileSync(`${TOKEN_KEYS_PATH}token.key`, "utf8");
+const PUBLIC_KEY=fs.readFileSync(`${TOKEN_KEYS_PATH}token.key.pub`, "utf8");
+
+console.log(PUBLIC_KEY);
 
 const useCases = makeUseCases(
   v4,
   customEmailValidator,
   customPasswordValidator,
   passwordService,
-  makeTokenService()(),
+  makeTokenService(PRIVATE_KEY, PUBLIC_KEY)(),
   await makeMongoDBRepository(MONGODB_CONNECTION_STRING)()
 );
 
