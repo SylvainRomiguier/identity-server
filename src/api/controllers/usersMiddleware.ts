@@ -1,5 +1,6 @@
 import { VerifyToken } from "../../domain/useCases";
 import { Handler } from "../../infrastructure/routers/IRouter";
+import { IncomingUserDto } from "../Dto/IncomingUserDto";
 
 const checkScopes = (
   requiredScopes: string[],
@@ -44,6 +45,7 @@ export const authorizationMiddleware =
             id === user.id &&
             requiredScopes.includes("self")
             && !user.scopes.includes("self")
+            || (req.body as IncomingUserDto).scopes !== undefined
           ) {
             return res.status(403).send("you do not have the rights to do that.");
           }
