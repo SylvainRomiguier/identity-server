@@ -1,0 +1,7 @@
+node_modules/
+js/
+deploy.yml
+.env
+test-deployed-server.http
+Dockerfile
+test.http

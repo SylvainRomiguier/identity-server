@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "firstName": "Raoul",
+      "lastName": "Volfoni",
+      "email": "raoul@tontons-flingueurs.fr",
+      "userName": "Raoul",
+      "password": "Password1#",
+      "scopes": ["self", "account"]
+    },
+    {
+      "firstName": "Fernand",
+      "lastName": "Naudin",
+      "email": "fernand@tontons-flingueurs.fr",
+      "userName": "Fernand",
+      "password": "Password1#",
+      "scopes": ["self", "account"]
+    },
+    {
+      "firstName": "Antoine",
+      "lastName": "Delafoy",
+      "email": "antoine@tontons-flingueurs.fr",
+      "userName": "Antoine",
+      "password": "Password1#",
+      "scopes": ["self", "account"]
+    },
+    {
+      "firstName": "Jean",
+      "lastName": "Le Majordome",
+      "email": "jean@tontons-flingueurs.fr",
+      "userName": "Jean",
+      "password": "Password1#",
+      "scopes": ["self", "account"]
+    },
+    {
+      "firstName": "Admin",
+      "lastName": "Admin",
+      "email": "admin@tontons-flingueurs.fr",
+      "userName": "Admin",
+      "password": "AdminAccount1#",
+      "scopes": ["self", "account", "admin"]
+    }
+  ]
+}
