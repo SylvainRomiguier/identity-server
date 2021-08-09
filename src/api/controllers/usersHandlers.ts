@@ -19,7 +19,7 @@ export const getUsers =
     try {
       res.send((await getAllUsers()).map((user) => toOutgoingUserDto(user)));
     } catch (error) {
-      res.status(500).send(`error in getUsers : ${error.message}`);
+      res.status(500).send({ error: `error in getUsers : ${error.message}` });
     }
   };
 
@@ -32,10 +32,10 @@ export const getUserById =
       if (user) {
         res.send(toOutgoingUserDto(user));
       } else {
-        res.status(404).send("no user found with this id.");
+        res.status(404).send({error: "no user found with this id."});
       }
     } catch (error) {
-      res.status(404).send(error.message);
+      res.status(404).send({ error: error.message });
     }
   };
 
@@ -55,7 +55,7 @@ export const postNewUser =
       res.status(200).send(toOutgoingUserDto(newUser));
     } catch (error) {
       console.log(error);
-      res.status(400).send(error.message);
+      res.status(400).send({ error: error.message });
     }
   };
 
@@ -76,7 +76,7 @@ export const putUpdatedUser =
       );
       res.status(200).send(toOutgoingUserDto(updatedUser));
     } catch (error) {
-      res.status(400).send(error.message);
+      res.status(400).send({ error: error.message });
     }
   };
 
@@ -86,9 +86,9 @@ export const deleteUser =
     try {
       const { id } = req.params as { id: string };
       await removeUser(id);
-      res.status(200).send(`User with id: ${id} removed.`);
+      res.status(200).send({success: `User with id: ${id} removed.`});
     } catch (error) {
-      res.status(400).send(error.message);
+      res.status(400).send({ error: error.message });
     }
   };
 
@@ -96,14 +96,12 @@ export const login =
   (login: Login): Handler =>
   async (req, res) => {
     try {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Methods", ["POST", "OPTIONS"]);
       const body = req.body as IncomingLoginDto;
       const token = await login(body.email, body.password);
       res.status(200).send({ token } as OutGoingTokenDto);
     } catch (error) {
       console.log(error);
-      res.status(400).send(error.message);
+      res.status(400).send({ error: error.message });
     }
   };
 
@@ -118,13 +116,13 @@ export const verifyToken =
         if (user) {
           res.status(200).send(user);
         } else {
-          res.status(401).send("you are not authorized.");
+          res.status(401).send({error: "you are not authorized."});
         }
       } else {
-        res.status(401).send("you are not authorized.");
+        res.status(401).send({error: "you are not authorized."});
       }
     } catch (error) {
       console.log(error);
-      res.status(400).send(error.message);
+      res.status(400).send({ error: error.message });
     }
   };
