@@ -1,6 +1,7 @@
 import { v4 } from "uuid";
 import createFastify from "fastify";
 import fastifySwagger from "fastify-swagger";
+import fastifyCors from "fastify-cors";
 import {makeTokenService} from "./infrastructure/services/tokenService";
 // import express from "express";
 // import { inMemoryRepository } from "./infrastructure/repositories/mockupRepository/mockupRepository";
@@ -26,9 +27,13 @@ fastify.register(fastifySwagger, {
     info: {
       title: "Identity Server Swagger",
       description: "A clean architecture identity server",
-      version: "0.1.0",
+      version: "1.0.0",
     },
   },
+});
+fastify.register(fastifyCors, {
+  origin: "*",
+  methods: "GET,PUT,POST,DELETE,OPTIONS"
 });
 //const app = express();
 //app.use(express.json());
@@ -38,8 +43,6 @@ const MONGODB_CONNECTION_STRING = process.env.MONGODB_CONNECTION_STRING;
 const TOKEN_KEYS_PATH=process.env.TOKEN_KEYS_PATH
 const PRIVATE_KEY=fs.readFileSync(`${TOKEN_KEYS_PATH}token.key`, "utf8");
 const PUBLIC_KEY=fs.readFileSync(`${TOKEN_KEYS_PATH}token.key.pub`, "utf8");
-
-console.log(PUBLIC_KEY);
 
 const useCases = makeUseCases(
   v4,

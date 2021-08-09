@@ -96,6 +96,8 @@ export const login =
   (login: Login): Handler =>
   async (req, res) => {
     try {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Methods", ["POST", "OPTIONS"]);
       const body = req.body as IncomingLoginDto;
       const token = await login(body.email, body.password);
       res.status(200).send({ token } as OutGoingTokenDto);

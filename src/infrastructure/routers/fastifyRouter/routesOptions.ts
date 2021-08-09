@@ -84,4 +84,19 @@ export const routesOptions = [
       },
     },
   },
+  {
+    method: "POST",
+    route: "/users/login",
+    schema: {
+      description: "login",
+      body: {
+        type: "object",
+        required: ["email", "password"],
+        properties: {
+          email: { type: "string" },
+          password: { type: "string" },
+        },
+      },
+    },
+  },
 ];
