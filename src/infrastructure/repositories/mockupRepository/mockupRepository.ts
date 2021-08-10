@@ -1,5 +1,5 @@
 import { UserDto, userDtoToDomain } from "../../../infrastructure/Dto/UserDto";
-import { IRepository } from "../IRepository";
+import { IRepository } from "../../../domain/useCases/IRepository";
 
 export const inMemoryRepository = ():IRepository => {
   let users:UserDto[] = [];

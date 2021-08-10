@@ -1,6 +1,7 @@
-import { UserDto, userDtoToDomain } from "../../Dto/UserDto";
-import { IRepository } from "../IRepository";
+import { UserDto, userDtoFromDomain, userDtoToDomain } from "../../Dto/UserDto";
+import { IRepository } from "../../../domain/useCases/IRepository";
 import { Collection, MongoClient } from "mongodb";
+import { User } from "../../../domain/entities/user";
 
 export const makeMongoDBRepository =
   (connectionString: string | undefined) => async (): Promise<IRepository> => {
@@ -10,7 +11,6 @@ export const makeMongoDBRepository =
       );
     }
 
-    // TODO : implements methods for mongoDB
     const client = new MongoClient(connectionString);
     let users:Collection<UserDto>;
 
@@ -31,15 +31,15 @@ export const makeMongoDBRepository =
       const _users = await users.find().toArray();
       return _users.map((u) => userDtoToDomain(u));
     }
-    const addUser = async (user: UserDto) => {
-      const _user = await users.insertOne({...user});
+    const addUser = async (user: User) => {
+      const _user = await users.insertOne(userDtoFromDomain(user));
       return userDtoToDomain(user);
     };
     const removeUser = async (id: string) => {
       await users.deleteOne({id});
     };
-    const updateUser = async (user: UserDto) => {
-      await users.findOneAndReplace({id:user.id}, user);
+    const updateUser = async (user: User) => {
+      await users.findOneAndReplace({id:user.id}, userDtoFromDomain(user));
       return userDtoToDomain(user);
     };
     const getUserByEmail = async (email: string) => {

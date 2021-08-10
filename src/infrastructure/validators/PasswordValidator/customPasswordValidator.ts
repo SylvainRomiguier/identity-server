@@ -1,4 +1,4 @@
-import { IValidator } from "../IValidator";
+import { IValidator } from "../../../domain/useCases/IValidator";
 
 export const customPasswordValidator: IValidator = (password: string) => {
   const oneNumberRule = "^.*[0-9].*$";

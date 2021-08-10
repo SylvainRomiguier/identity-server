@@ -1,6 +1,7 @@
-import { IRepository } from "../../infrastructure/repositories/IRepository";
-import { IPasswordService } from "../../infrastructure/services/IPasswordService";
-import { ITokenService } from "../../infrastructure/services/ITokenService";
+import { IRepository } from "./IRepository";
+import { IPasswordService } from "./IPasswordService";
+import { ITokenService } from "./ITokenService";
+export type Login = (email: string, password: string) => Promise<string>;
 
 interface UserLoginDto {
   id: string;

@@ -1,44 +1,14 @@
-import { makeAddUser } from "./addUser";
-import { makeRemoveUser } from "./removeUser";
-import { makeUpdateUser } from "./updateUser";
-import { makeGetUserById } from "./getUserById";
-import { makeGetAllUsers } from "./getAllUsers";
-import { IRepository } from "../../infrastructure/repositories/IRepository";
-import { User } from "../entities/user";
-import { IValidator } from "../../infrastructure/validators/IValidator";
-import { IPasswordService } from "../../infrastructure/services/IPasswordService";
-import { ITokenService } from "../../infrastructure/services/ITokenService";
-import { makeLogin } from "./login";
-import { makeVerifyToken, UserPayloadDto } from "./verifyToken";
-
-export type AddUser = (
-  firstName: string,
-  lastName: string,
-  userName: string,
-  email: string,
-  password: string,
-  scopes: string[]
-) => Promise<User>;
-
-export type UpdateUser = (
-  id: string,
-  firstName: string,
-  lastName: string,
-  userName: string,
-  email: string,
-  password: string,
-  scopes: string[]
-) => Promise<User>;
-
-export type RemoveUser = (id: string) => Promise<void>;
-
-export type GetUserById = (id: string) => Promise<User | undefined>;
-
-export type GetAllUsers = () => Promise<User[]>;
-
-export type Login = (email: string, password: string) => Promise<string>;
-
-export type VerifyToken = (token: string) => UserPayloadDto;
+import { AddUser, makeAddUser } from "./addUser";
+import { makeRemoveUser, RemoveUser } from "./removeUser";
+import { makeUpdateUser, UpdateUser } from "./updateUser";
+import { GetUserById, makeGetUserById } from "./getUserById";
+import { GetAllUsers, makeGetAllUsers } from "./getAllUsers";
+import { IRepository } from "./IRepository";
+import { IValidator } from "./IValidator";
+import { IPasswordService } from "./IPasswordService";
+import { ITokenService } from "./ITokenService";
+import { Login, makeLogin } from "./login";
+import { makeVerifyToken, VerifyToken } from "./verifyToken";
 
 export interface UseCases {
   addUser: AddUser;

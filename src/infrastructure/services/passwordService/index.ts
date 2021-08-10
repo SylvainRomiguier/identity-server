@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { IPasswordService } from "../IPasswordService";
+import { IPasswordService } from "../../../domain/useCases/IPasswordService";
 import { Hash } from "../../../domain/entities/user";
 
 const generateSalt = (rounds: number) => {

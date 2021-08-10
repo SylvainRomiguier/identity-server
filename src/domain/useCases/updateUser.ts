@@ -1,7 +1,17 @@
-import { IRepository } from "../../infrastructure/repositories/IRepository";
-import { IValidator } from "../../infrastructure/validators/IValidator";
-import { IPasswordService } from "../../infrastructure/services/IPasswordService";
-import { makeUser } from "../entities/user";
+import { IRepository } from "./IRepository";
+import { IValidator } from "./IValidator";
+import { IPasswordService } from "./IPasswordService";
+import { makeUser, User } from "../entities/user";
+
+export type UpdateUser = (
+  id: string,
+  firstName: string,
+  lastName: string,
+  userName: string,
+  email: string,
+  password: string,
+  scopes: string[]
+) => Promise<User>;
 
 export const makeUpdateUser =
   (emailValidator: IValidator, passwordValidator: IValidator, passwordService: IPasswordService, repository: IRepository) =>

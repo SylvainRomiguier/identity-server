@@ -1,4 +1,4 @@
-import { IValidator } from "../IValidator";
+import { IValidator } from "../../../domain/useCases/IValidator";
 
 export const customEmailValidator: IValidator = (email: string) => {
   const regex =

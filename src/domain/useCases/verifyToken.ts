@@ -1,4 +1,6 @@
-import { ITokenService } from "../../infrastructure/services/ITokenService";
+import { ITokenService } from "./ITokenService";
+
+export type VerifyToken = (token: string) => UserPayloadDto;
 
 export interface UserPayloadDto {
   id: string;
